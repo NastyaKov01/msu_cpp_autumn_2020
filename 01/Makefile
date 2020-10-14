@@ -1,11 +1,11 @@
 CC=g++
 FLAGS=-std=c++17 -Wall
-all: test_proc
+all: test
 
-test_proc: test    
+test: test_proc    
 	./test
 
-test: test.o allocator.o
+test_proc: test.o allocator.o
 	$(CC) $(FLAGS) -o test test.o allocator.o
 
 test.o: test.cpp allocator.h

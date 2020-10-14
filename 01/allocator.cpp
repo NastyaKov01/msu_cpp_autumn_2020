@@ -6,7 +6,9 @@ Allocator::Allocator() = default;
 
 Allocator::~Allocator()
 {
-    delete [] start;
+    if (flag) {
+        delete [] start;
+    }
 }
 
 void Allocator::makeAllocator(size_t maxSize)
@@ -17,10 +19,8 @@ void Allocator::makeAllocator(size_t maxSize)
     }
     start = new char[maxSize];
     offset = start;
-    if (start != nullptr) {
-        total_size = maxSize;
-        flag = true;
-    }
+    total_size = maxSize;
+    flag = true;
 }
 
 char* Allocator::alloc(size_t size)
