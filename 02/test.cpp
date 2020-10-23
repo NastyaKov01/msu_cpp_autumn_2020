@@ -16,7 +16,7 @@ void MyDigitCallback(uint64_t num)
     std::cout << "Digit = " << num << std::endl;
 }
 
-void MyStringCallback(std::string st) 
+void MyStringCallback(std::string & st) 
 {
     std::cout << "String = " << st << std::endl;
 }
