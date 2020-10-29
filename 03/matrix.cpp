@@ -79,9 +79,6 @@ Matrix &Matrix::operator*=(int64_t num)
 
 Matrix &Matrix::operator=(const Matrix &other)
 {
-    if (this == &other) {
-        return *this;
-    }
     if (rows * columns != other.rows * other.columns) {
         delete [] ptr;
         ptr = new int64_t[other.rows * other.columns];
