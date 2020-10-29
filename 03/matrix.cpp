@@ -3,7 +3,7 @@
 const int64_t Proxy::operator[](size_t col_idx) const
 {
     if (col_idx < 0 || col_idx >= cols) {
-        throw std::out_of_range("Columns index is out of range");
+        throw std::out_of_range("Column index is out of range");
     }
     return proxy_ptr[row_idx * cols + col_idx];
 }
@@ -11,7 +11,7 @@ const int64_t Proxy::operator[](size_t col_idx) const
 int64_t &Proxy::operator[](size_t col_idx) 
 {
     if (col_idx < 0 || col_idx >= cols) {
-        throw std::out_of_range("Columns index is out of range");
+        throw std::out_of_range("Column index is out of range");
     }
     return proxy_ptr[row_idx * cols + col_idx];
 }
@@ -23,7 +23,7 @@ Matrix::Matrix(size_t n): rows(n), columns(n)
     if (ptr != nullptr) {
         std::fill(ptr, ptr + rows * columns, 0);
     } else {
-        throw "Memory allocation error";
+        throw std::logic_error("Memory allocation error");
     }
 }
 
@@ -33,7 +33,7 @@ Matrix::Matrix(size_t rws, size_t cols): rows(rws), columns(cols)
     if (ptr != nullptr) {
         std::fill(ptr, ptr + rows * columns, 0);
     } else {
-        throw "Memory allocation error";
+        throw std::logic_error("Memory allocation error");
     }
 }
 
@@ -91,7 +91,6 @@ Matrix &Matrix::operator=(const Matrix &other)
     size_t totsize = rows * columns;
     for (size_t i = 0; i < totsize; ++i) {
         ptr[i] = other.ptr[i];
-        std::cout << "###" << i << " " << other.ptr[i] << std::endl;
     }
     return *this;
 }
@@ -134,19 +133,16 @@ std::ostream& operator<<(std::ostream& ostream, const Matrix &m)
 
 Matrix operator+(Matrix &m1, Matrix &m2)
 {
-    if (m1.rows == m2.rows && m1.columns == m2.columns) {
-        size_t rows = m1.rows;
-        size_t cols = m1.columns;
-        Matrix tmp(rows, cols);
-        for (size_t i = 0; i < rows; ++i) {
-            for (size_t j = 0; j < cols; ++j) {
-                tmp[i][j] = m1[i][j] + m2[i][j];
-                ///std::cout << "!!!" << tmp[i][j] << std::endl;
-            }
-        }
-        std::cout << "%%%" << tmp[0][0] << std::endl;
-        return tmp;
-    } else {
-        throw "Different dimensions";
+    if (m1.rows != m2.rows || m1.columns != m2.columns) {
+        throw std::logic_error("Different dimensions");
     }
+    size_t rows = m1.rows;
+    size_t cols = m1.columns;
+    Matrix tmp(rows, cols);
+    for (size_t i = 0; i < rows; ++i) {
+        for (size_t j = 0; j < cols; ++j) {
+            tmp[i][j] = m1[i][j] + m2[i][j];
+        }
+    }
+    return tmp;
 }

@@ -1,6 +1,5 @@
 #include "matrix.h"
 #include <cassert>
-#include <string>
 
 void TestCreation()
 {  
@@ -9,8 +8,8 @@ void TestCreation()
         assert(m.GetRows() == 2);
         assert(m.GetColumns() == 3);
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 1 passed successfully" << std::endl;
 }
@@ -33,25 +32,17 @@ void TestArithmetic()
             m3 = m1 + m2;
             for (size_t i = 0; i < rws; ++i) {
                 for (size_t j = 0; j < cols; ++j) {
-                    std::cout << "***" << (m1 + m2)[i][j] << std::endl;
+                    assert(m1[i][j] == 6);
+                    assert(m3[i][j] == 9);
                 }
             }
-            ///std::cout << "!!!" << m1[0][0] << m2[0][0] << (m1 +m2)[0][0] << std::endl;
-            /*for (size_t i = 0; i < rws; ++i) {
-                for (size_t j = 0; j < cols; ++j) {
-                    assert(m1[i][j] == 6);
-                   /// std::cout << "***" << m1[i][j] << " " <<m2[i][j] << " " << (m1 + m2)[i][j] << " " << m3[i][j] << std::endl;
-                    ///std::cout << "***" << m3[i][j] << " " << (m1+m2)[i][j] <<std::endl;
-                    ///assert(m3[i][j] == 9);
-                }
-            }*/
         }
-        catch (std::string s) {
-            std::cout << s << std::endl;
+        catch (std::logic_error &s) {
+            std::cout << "Exception: " << s.what() << std::endl;
         }
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 2 passed successfully" << std::endl;
 }
@@ -77,8 +68,8 @@ void TestEquals()
         assert((m2 != m3) == true);
         assert((m2 != m4) == true);
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 3 passed successfully" << std::endl;
 }
@@ -94,8 +85,8 @@ void TestOutOfRange1()
             std::cout << "Exception: " << s.what() << std::endl;
         }
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 4 passed successfully" << std::endl;
 }
@@ -111,8 +102,8 @@ void TestOutOfRange2()
             std::cout << "Exception: " << s.what() << std::endl;
         }
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 5 passed successfully" << std::endl;
 }
@@ -128,8 +119,8 @@ void TestOutOfRange3()
             std::cout << "Exception: " << s.what() << std::endl;
         }
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 6 passed successfully" << std::endl;
 }
@@ -147,8 +138,8 @@ void TestPrint()
         }
         std::cout << m << std::endl;
     }
-    catch (std::string s) {
-        std::cout << s << std::endl;
+    catch (std::logic_error &s) {
+        std::cout << "Exception: " << s.what() << std::endl;
     }
     std::cout << "Test 7 passed successfully" << std::endl;
 
