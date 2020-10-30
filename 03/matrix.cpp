@@ -42,12 +42,12 @@ Matrix::~Matrix()
     delete [] ptr;
 }
 
-size_t Matrix::GetRows()
+size_t Matrix::GetRows() const
 {
     return rows;
 }
 
-size_t Matrix::GetColumns()
+size_t Matrix::GetColumns() const
 {
     return columns;
 }
@@ -92,7 +92,7 @@ Matrix &Matrix::operator=(const Matrix &other)
     return *this;
 }
 
-bool operator==(const Matrix &m1, const Matrix &m2) 
+bool operator==(const Matrix &m1, const Matrix &m2)
 {
     if ((m1.rows == m2.rows) && (m1.columns == m2.columns)) {
         size_t rws = m1.rows;
@@ -128,7 +128,7 @@ std::ostream& operator<<(std::ostream& ostream, const Matrix &m)
     return ostream;
 }
 
-Matrix operator+(Matrix &m1, Matrix &m2)
+Matrix operator+(Matrix &m1, Matrix &m2) 
 {
     if (m1.rows != m2.rows || m1.columns != m2.columns) {
         throw std::logic_error("Different dimensions");

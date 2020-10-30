@@ -21,8 +21,8 @@ public:
     Matrix(size_t n);
     Matrix(size_t rws, size_t cols);
     ~Matrix();
-    size_t GetRows();
-    size_t GetColumns();
+    size_t GetRows() const;
+    size_t GetColumns() const;
     const Proxy operator[](size_t row_index) const;
     Proxy operator[](size_t row_index);
     Matrix &operator*=(int64_t num);
